@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front-End Show | A Batalha dos Programadores</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-effects"></div>
+
+    <header>
+        <div class="logo">💻 FRONT-END SHOW</div>
+        <p>A BATALHA DOS PROGRAMADORES</p>
+    </header>
+
+    <main>
+
+        <!-- TELA INICIAL -->
+        <section id="tela-inicial" class="tela ativa">
+            <div class="card principal">
+                <div class="icone-principal">🏆</div>
+                <h1>FRONT-END SHOW</h1>
+                <h2>A BATALHA DOS PROGRAMADORES</h2>
+                <p>Prepare-se para testar seus conhecimentos sobre programação web!</p>
+
+                <div class="informacoes">
+                    <span>🎯 40 questões</span>
+                    <span>👥 4 equipes</span>
+                    <span>⏱️ Tempo limitado</span>
+                </div>
+
+                <button onclick="mostrarCadastro()">COMEÇAR JOGO 🚀</button>
+            </div>
+        </section>
+
+        <!-- CADASTRO DAS EQUIPES -->
+        <section id="tela-cadastro" class="tela">
+            <div class="card">
+                <h1>👥 CADASTRE AS EQUIPES</h1>
+                <p>Escolha os nomes das equipes desta rodada.</p>
+
+                <div class="campo">
+                    <label for="nome1">🔵 Nome da equipe 1</label>
+                    <input type="text" id="nome1" placeholder="Digite o nome da equipe">
+                </div>
+
+                <div class="campo">
+                    <label for="nome2">🔴 Nome da equipe 2</label>
+                    <input type="text" id="nome2" placeholder="Digite o nome da equipe">
+                </div>
+
+                <button onclick="iniciarRodada()">INICIAR BATALHA ⚔️</button>
+            </div>
+        </section>
+
+        <!-- TELA DO JOGO -->
+        <section id="tela-jogo" class="tela">
+            <div class="painel-superior">
+                <div class="equipe equipe1">
+                    <h3 id="nome-equipe1">Equipe 1</h3>
+                    <span id="pontos1">0</span>
+                    <small>pontos</small>
+                </div>
+
+                <div class="centro">
+                    <h2>VS</h2>
+                    <span id="numero-questao">Questão 1/20</span>
+                </div>
+
+                <div class="equipe equipe2">
+                    <h3 id="nome-equipe2">Equipe 2</h3>
+                    <span id="pontos2">0</span>
+                    <small>pontos</small>
+                </div>
+            </div>
+
+            <div class="progresso">
+                <div id="barra-progresso"></div>
+            </div>
+
+            <div class="card pergunta-card">
+                <div class="informacoes-pergunta">
+                    <span id="categoria">HTML</span>
+                    <span id="vez-equipe">Vez da equipe</span>
+                </div>
+
+                <div class="controle-tempo">
+                    <div class="cronometro">
+                        ⏱️ <span id="tempo">30</span> segundos
+                    </div>
+
+                    <button id="btn-pausar" onclick="pausarTempo()">
+                        ⏸️ PAUSAR
+                    </button>
+                </div>
+
+                <div id="visual-pergunta" class="visual-pergunta"></div>
+                <h2 id="pergunta">Pergunta aparecerá aqui.</h2>
+                <div id="alternativas" class="alternativas"></div>
+                <div id="feedback" class="feedback" aria-live="polite"></div>
+
+                <!-- PAINEL DE RESULTADO DA RESPOSTA -->
+                <div id="resultado-resposta" class="resultado-resposta escondido" aria-live="assertive">
+                    <h2 id="titulo-resposta"></h2>
+                    <p id="explicacao-resposta"></p>
+                    <button type="button" onclick="continuarJogo()">CONTINUAR ➜</button>
+                </div>
+            </div>
+
+            <!-- PODERES ESPECIAIS -->
+            <div class="poderes">
+                <button id="btn-pular" onclick="pularQuestao()">⏭️ PULAR QUESTÃO</button>
+                <button id="btn-cartas" onclick="abrirCartas()">🃏 CARTAS MISTERIOSAS</button>
+                <button id="btn-tempo" onclick="tempoExtra()">⏱️ TEMPO EXTRA</button>
+                <button id="btn-dica" onclick="mostrarDica()">💡 PEDIR DICA</button>
+                <button id="btn-bau" onclick="abrirBau()">🎁 BAÚ SURPRESA</button>
+            </div>
+        </section>
+
+        <!-- CARTAS MISTERIOSAS -->
+        <section id="tela-cartas" class="tela">
+            <div class="card">
+                <h1>🃏 CARTAS MISTERIOSAS</h1>
+                <p>Escolha uma carta e descubra seu poder!</p>
+
+                <div class="cartas">
+                    <button class="carta" onclick="revelarCarta(0)">🃏<br>CARTA 1</button>
+                    <button class="carta" onclick="revelarCarta(1)">🃏<br>CARTA 2</button>
+                    <button class="carta" onclick="revelarCarta(2)">🃏<br>CARTA 3</button>
+                </div>
+
+                <div id="resultado-carta"></div>
+
+                <button id="voltar-cartas" class="escondido" onclick="voltarPergunta()">
+                    VOLTAR À PERGUNTA
+                </button>
+            </div>
+        </section>
+
+        <!-- RESULTADO DA RODADA -->
+        <section id="tela-resultado" class="tela">
+            <div class="card resultado">
+                <div class="trofeu">🏆</div>
+                <h1>FIM DA BATALHA!</h1>
+                <h2 id="vencedor">Equipe vencedora!</h2>
+                <div id="placar-final"></div>
+                <button onclick="proximaRodada()">CONTINUAR 🏁</button>
+            </div>
+        </section>
+
+        <!-- RESULTADO FINAL -->
+        <section id="tela-campeao" class="tela">
+            <div class="card resultado">
+                <div class="trofeu">🏆🎉🏆</div>
+                <h1>GRANDE CAMPEÃ!</h1>
+                <h2 id="campea"></h2>
+                <div id="ranking-final"></div>
+                <p>Parabéns a todas as equipes!</p>
+                <button onclick="location.reload()">JOGAR NOVAMENTE 🔄</button>
+            </div>
+        </section>
+
+        <!-- MODAL DE DESAFIO / ROUBA-PONTOS / BAÚ -->
+        <div id="modal-desafio" class="modal escondido">
+            <div class="modal-conteudo">
+                <h2 id="titulo-modal"></h2>
+                <p id="texto-modal"></p>
+                <div id="opcoes-modal"></div>
+                <button id="fechar-modal" onclick="fecharModal()">CONTINUAR</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>FRONT-END SHOW © 2026 |    Criado por Professora Raquel   | Desenvolvendo conhecimentos 🚀</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
